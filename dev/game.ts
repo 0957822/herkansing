@@ -1,7 +1,12 @@
 class Game {
+
     private div: HTMLElement
-    
+
     private player:Player
+    private cars : Car[] =[]
+    
+    private score : number = 0
+    private scoreElement : HTMLElement
     
     constructor() {    
         this.div = document.createElement("level")

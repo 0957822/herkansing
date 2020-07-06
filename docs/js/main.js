@@ -29,6 +29,8 @@ var Car = (function () {
 }());
 var Game = (function () {
     function Game() {
+        this.cars = [];
+        this.score = 0;
         this.div = document.createElement("level");
         document.body.appendChild(this.div);
         this.player = new Player();
@@ -49,8 +51,15 @@ var Game = (function () {
     return Game;
 }());
 window.addEventListener("load", function () { return new Game(); });
+var GameObject = (function () {
+    function GameObject() {
+        this.x = 0;
+        this.y = 0;
+    }
+    return GameObject;
+}());
 var Player = (function () {
-    function Player() {
+    function Player(game) {
         var _this = this;
         this.div = document.createElement("player");
         var level = document.getElementsByTagName("level")[0];

@@ -1,10 +1,8 @@
 class Player {
 
-    private div: HTMLElement    
-    private x:number
-    private y:number
+    private game : Game
 
-    constructor() {
+    constructor(game : Game) {
         this.div = document.createElement("player")
         let level = document.getElementsByTagName("level")[0]!
         level.appendChild(this.div)

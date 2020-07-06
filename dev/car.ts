@@ -1,9 +1,6 @@
 class Car {
 
     private speed: number = 0
-    private div: HTMLElement
-    private x: number
-    private y: number
 
     constructor() {
         this.div = document.createElement("car")
