@@ -32,5 +32,4 @@ class Car extends GameObject{
     }
 
     
-
 }
