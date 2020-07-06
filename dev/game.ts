@@ -1,21 +1,26 @@
 class Game {
-
-    private div: HTMLElement
-
-    private player:Player
-    private cars : Car[] =[]
+    
+    private div : HTMLElement
+    
+    private player : Player
+    private cars : Car[] = []
     
     private score : number = 0
-    private scoreElement : HTMLElement
-    
+    private scoreElement: HTMLElement
+
     constructor() {    
         this.div = document.createElement("level")
         document.body.appendChild(this.div)
     
-        this.player = new Player()
+        this.scoreElement = document.createElement("score")
+        this.scoreElement.innerHTML = "Score: 0"
+        this.div.appendChild(this.scoreElement)
 
-        this.gameLoop()
-    }
+        this.player = new Player(this)
+
+        for (let i = 0; i < 6; i++) {
+            this.cars.push(new Car())
+        }
 
     private gameLoop(){
         this.player.update()

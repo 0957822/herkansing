@@ -15,10 +15,14 @@ var __extends = (this && this.__extends) || (function () {
 var Car = (function (_super) {
     __extends(Car, _super);
     function Car() {
-        var _this = this;
+        var _this = _super.call(this, "car") || this;
         _this.speed = 0;
+        _this.x = (Math.random() * -400) - 168;
+        _this.y = Math.ceil(Math.random() * 5) * 120;
+        _this.speed = Math.random() * 2 + 2;
+        _this.setColor();
+        _this.hitbox = document.createElement("carhitbox");
         _this.div = document.createElement("car");
-        var level = document.getElementsByTagName("level")[0];
         level.appendChild(_this.div);
         _this.x = (Math.random() * -400) - 168;
         _this.y = Math.ceil(Math.random() * 5) * 120;
@@ -49,8 +53,13 @@ var Game = (function () {
         this.score = 0;
         this.div = document.createElement("level");
         document.body.appendChild(this.div);
-        this.player = new Player();
-        this.gameLoop();
+        this.scoreElement = document.createElement("score");
+        this.scoreElement.innerHTML = "Score: 0";
+        this.div.appendChild(this.scoreElement);
+        this.player = new Player(this);
+        for (var i = 0; i < 6; i++) {
+            this.cars.push(new Car());
+        }
     }
     Game.prototype.gameLoop = function () {
         this.player.update();
@@ -68,21 +77,31 @@ var Game = (function () {
 }());
 window.addEventListener("load", function () { return new Game(); });
 var GameObject = (function () {
-    function GameObject() {
+    function GameObject(tag) {
         this.x = 0;
         this.y = 0;
+        this._div = document.createElement(tag);
+        var level = document.getElementsByTagName("level")[0];
+        level.appendChild(this._div);
     }
+    Object.defineProperty(GameObject.prototype, "div", {
+        get: function () { return this._div; },
+        enumerable: false,
+        configurable: true
+    });
+    GameObject.prototype.getRectangle = function () {
+        return this._div.getBoundingClientRect();
+    };
     return GameObject;
 }());
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player(game) {
-        var _this = this;
-        _this.div = document.createElement("player");
-        var level = document.getElementsByTagName("level")[0];
-        level.appendChild(_this.div);
-        _this.x = 400;
-        _this.y = 670;
+        var _this = _super.call(this, "player") || this;
+        _this.game = game;
+        _this.reset();
+        _this.hitbox = document.createElement("playerhitbox");
+        _this.div.appendChild(_this.hitbox);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         return _this;
     }

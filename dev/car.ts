@@ -5,8 +5,18 @@ class Car extends GameObject{
     private speed: number = 0
 
     constructor() {
+        super("car")
+
+        this.x = (Math.random() * -400) - 168
+        this.y = Math.ceil(Math.random() * 5) * 120
+        this.speed = Math.random() * 2 + 2
+        this.setColor()
+
+        this.hitbox = document.createElement("carhitbox")
+
         this.div = document.createElement("car")
-        let level = document.getElementsByTagName("level")[0]!
+
+
         level.appendChild(this.div)
 
         this.x = (Math.random() * -400) - 168

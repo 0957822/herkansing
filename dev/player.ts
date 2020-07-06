@@ -3,13 +3,15 @@ class Player extends GameObject{
     private game : Game
 
     constructor(game : Game) {
-        this.div = document.createElement("player")
-        let level = document.getElementsByTagName("level")[0]!
-        level.appendChild(this.div)
+        super("player")
 
-        this.x = 400
-        this.y = 670
+        this.game = game
+
+        this.reset()
         
+        this.hitbox = document.createElement("playerhitbox")
+        this.div.appendChild(this.hitbox)
+
         window.addEventListener("keydown", (e:KeyboardEvent) => this.onKeyDown(e))
     }
 
