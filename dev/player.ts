@@ -1,4 +1,4 @@
-class Player {
+class Player extends GameObject{
 
     private game : Game
 

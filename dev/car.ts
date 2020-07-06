@@ -1,4 +1,6 @@
-class Car {
+/// <reference path="gameobjects.ts" />
+
+class Car extends GameObject{
 
     private speed: number = 0
 

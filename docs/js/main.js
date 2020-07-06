@@ -1,14 +1,30 @@
 "use strict";
-var Car = (function () {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var Car = (function (_super) {
+    __extends(Car, _super);
     function Car() {
-        this.speed = 0;
-        this.div = document.createElement("car");
+        var _this = this;
+        _this.speed = 0;
+        _this.div = document.createElement("car");
         var level = document.getElementsByTagName("level")[0];
-        level.appendChild(this.div);
-        this.x = (Math.random() * -400) - 168;
-        this.y = Math.ceil(Math.random() * 5) * 120;
-        this.speed = Math.random() * 2 + 2;
-        this.setColor();
+        level.appendChild(_this.div);
+        _this.x = (Math.random() * -400) - 168;
+        _this.y = Math.ceil(Math.random() * 5) * 120;
+        _this.speed = Math.random() * 2 + 2;
+        _this.setColor();
+        return _this;
     }
     Car.prototype.getRectangle = function () {
         return this.div.getBoundingClientRect();
@@ -26,7 +42,7 @@ var Car = (function () {
         this.div.style.filter = "hue-rotate(" + color + "deg)";
     };
     return Car;
-}());
+}(GameObject));
 var Game = (function () {
     function Game() {
         this.cars = [];
@@ -58,15 +74,17 @@ var GameObject = (function () {
     }
     return GameObject;
 }());
-var Player = (function () {
+var Player = (function (_super) {
+    __extends(Player, _super);
     function Player(game) {
         var _this = this;
-        this.div = document.createElement("player");
+        _this.div = document.createElement("player");
         var level = document.getElementsByTagName("level")[0];
-        level.appendChild(this.div);
-        this.x = 400;
-        this.y = 670;
+        level.appendChild(_this.div);
+        _this.x = 400;
+        _this.y = 670;
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        return _this;
     }
     Player.prototype.getRectangle = function () {
         return this.div.getBoundingClientRect();
@@ -95,5 +113,5 @@ var Player = (function () {
         }
     };
     return Player;
-}());
+}(GameObject));
 //# sourceMappingURL=main.js.map
