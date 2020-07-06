@@ -38,6 +38,8 @@ class Car extends GameObject{
 
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)"
     }
+        super.update()
+    }
 
     private setColor() {
         let color:number = Math.random()*360 

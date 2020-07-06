@@ -44,4 +44,8 @@ class Player extends GameObject{
             break
         }
     }
+    public reset() : void {
+        this.x = 400
+        this.y = 670
+    }
 }

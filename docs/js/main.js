@@ -40,13 +40,15 @@ var Car = (function (_super) {
         }
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
     };
-    Car.prototype.setColor = function () {
-        var color = Math.random() * 360;
-        this.div.style.webkitFilter = "hue-rotate(" + color + "deg)";
-        this.div.style.filter = "hue-rotate(" + color + "deg)";
-    };
     return Car;
 }(GameObject));
+_super.update.call(this);
+setColor();
+{
+    var color = Math.random() * 360;
+    this.div.style.webkitFilter = "hue-rotate(" + color + "deg)";
+    this.div.style.filter = "hue-rotate(" + color + "deg)";
+}
 var Game = (function () {
     function Game() {
         this.cars = [];
@@ -65,13 +67,15 @@ var Game = (function () {
         this.player.update();
         requestAnimationFrame(this.gameLoop.bind(this));
     };
-    Game.prototype.update = function () {
-    };
     Game.prototype.checkCollision = function (a, b) {
         return (a.left <= b.right &&
             b.left <= a.right &&
             a.top <= b.bottom &&
             b.top <= a.bottom);
+    };
+    Game.prototype.addPoint = function () {
+        this.score++;
+        this.scoreElement.innerHTML = "Score: " + this.score;
     };
     return Game;
 }());
@@ -92,8 +96,14 @@ var GameObject = (function () {
     GameObject.prototype.getRectangle = function () {
         return this._div.getBoundingClientRect();
     };
+    GameObject.prototype.update = function () {
+        this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    };
     return GameObject;
 }());
+for (var index = 0; index < array.length; index++) {
+    var element = array[index];
+}
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player(game) {
@@ -130,6 +140,10 @@ var Player = (function (_super) {
                 this.y += 30;
                 break;
         }
+    };
+    Player.prototype.reset = function () {
+        this.x = 400;
+        this.y = 670;
     };
     return Player;
 }(GameObject));

@@ -28,16 +28,17 @@ class Game {
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 
-    public update() : void {
-        
-    }
-
-    private checkCollision(a: ClientRect, b: ClientRect) {
+    private checkCollision(a: ClientRect, b: ClientRect) : boolean {
         return (a.left <= b.right &&
             b.left <= a.right &&
             a.top <= b.bottom &&
             b.top <= a.bottom)
-        }
+    }
+
+    public addPoint() : void {
+        this.score++
+        this.scoreElement.innerHTML = "Score: "+this.score
+    }
 } 
 
 
