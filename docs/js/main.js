@@ -12,6 +12,27 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var GameObject = (function () {
+    function GameObject(tag) {
+        this.x = 0;
+        this.y = 0;
+        this._div = document.createElement(tag);
+        var level = document.getElementsByTagName("level")[0];
+        level.appendChild(this._div);
+    }
+    Object.defineProperty(GameObject.prototype, "div", {
+        get: function () { return this._div; },
+        enumerable: false,
+        configurable: true
+    });
+    GameObject.prototype.getRectangle = function () {
+        return this._div.getBoundingClientRect();
+    };
+    GameObject.prototype.update = function () {
+        this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    };
+    return GameObject;
+}());
 var Car = (function (_super) {
     __extends(Car, _super);
     function Car() {
@@ -22,30 +43,23 @@ var Car = (function (_super) {
         _this.speed = Math.random() * 2 + 2;
         _this.setColor();
         _this.hitbox = document.createElement("carhitbox");
-        _this.div = document.createElement("car");
-        level.appendChild(_this.div);
-        _this.x = (Math.random() * -400) - 168;
-        _this.y = Math.ceil(Math.random() * 5) * 120;
-        _this.speed = Math.random() * 2 + 2;
-        _this.setColor();
+        _this.div.appendChild(_this.hitbox);
         return _this;
     }
     Car.prototype.update = function () {
         this.x += this.speed;
         if (this.x > window.innerWidth) {
-            this.x = -168;
+            this.x = -this.div.clientWidth;
         }
-        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+        _super.prototype.update.call(this);
+    };
+    Car.prototype.setColor = function () {
+        var color = Math.random() * 360;
+        this.div.style.webkitFilter = "hue-rotate(" + color + "deg)";
+        this.div.style.filter = "hue-rotate(" + color + "deg)";
     };
     return Car;
 }(GameObject));
-_super.update.call(this);
-setColor();
-{
-    var color = Math.random() * 360;
-    this.div.style.webkitFilter = "hue-rotate(" + color + "deg)";
-    this.div.style.filter = "hue-rotate(" + color + "deg)";
-}
 var Game = (function () {
     function Game() {
         this.cars = [];
@@ -86,30 +100,6 @@ var Game = (function () {
     return Game;
 }());
 window.addEventListener("load", function () { return new Game(); });
-var GameObject = (function () {
-    function GameObject(tag) {
-        this.x = 0;
-        this.y = 0;
-        this._div = document.createElement(tag);
-        var level = document.getElementsByTagName("level")[0];
-        level.appendChild(this._div);
-    }
-    Object.defineProperty(GameObject.prototype, "div", {
-        get: function () { return this._div; },
-        enumerable: false,
-        configurable: true
-    });
-    GameObject.prototype.getRectangle = function () {
-        return this._div.getBoundingClientRect();
-    };
-    GameObject.prototype.update = function () {
-        this._div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
-    };
-    return GameObject;
-}());
-for (var index = 0; index < array.length; index++) {
-    var element = array[index];
-}
 var Player = (function (_super) {
     __extends(Player, _super);
     function Player(game) {

@@ -25,7 +25,3 @@ class GameObject {
         this._div.style.transform = `translate(${this.x}px, ${this.y}px)` 
     }
 }
-for (let index = 0; index < array.length; index++) {
-    const element = array[index];
-    
-}
