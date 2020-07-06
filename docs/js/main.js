@@ -63,6 +63,14 @@ var Game = (function () {
     }
     Game.prototype.gameLoop = function () {
         this.player.update();
+        for (var _i = 0, _a = this.cars; _i < _a.length; _i++) {
+            var car = _a[_i];
+            car.update();
+            if (this.checkCollision(this.player.getRectangle(), car.getRectangle())) {
+                console.log("botsing");
+                this.player.reset();
+            }
+        }
         requestAnimationFrame(this.gameLoop.bind(this));
     };
     Game.prototype.checkCollision = function (a, b) {

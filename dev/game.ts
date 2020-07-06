@@ -23,12 +23,20 @@ class Game {
         }
 
         this.gameLoop()
-
     }
-    
+
     private gameLoop() : void {
         this.player.update()
-        
+
+        for (const car of this.cars) {
+            car.update()
+
+            if(this.checkCollision(this.player.getRectangle(), car.getRectangle())) {
+                console.log("botsing")
+                this.player.reset()
+            }
+        }
+
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 

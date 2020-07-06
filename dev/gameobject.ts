@@ -20,6 +20,7 @@ class GameObject {
         let level = document.getElementsByTagName("level")[0]!
         level.appendChild(this._div)
     }
+    
     public update() : void {
         this._div.style.transform = `translate(${this.x}px, ${this.y}px)` 
     }
