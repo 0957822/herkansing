@@ -25,17 +25,12 @@ class Car extends GameObject{
         this.setColor()
     }
 
-    public getRectangle() {
-        return this.div.getBoundingClientRect()
-    }
-
     public update(): void {
         this.x += this.speed
         
         if (this.x > window.innerWidth) {
             this.x = -168
         }
-
         this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)"
     }
         super.update()

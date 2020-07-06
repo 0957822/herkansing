@@ -22,9 +22,13 @@ class Game {
             this.cars.push(new Car())
         }
 
-    private gameLoop(){
-        this.player.update()
+        this.gameLoop()
 
+    }
+    
+    private gameLoop() : void {
+        this.player.update()
+        
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 

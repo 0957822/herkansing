@@ -30,9 +30,6 @@ var Car = (function (_super) {
         _this.setColor();
         return _this;
     }
-    Car.prototype.getRectangle = function () {
-        return this.div.getBoundingClientRect();
-    };
     Car.prototype.update = function () {
         this.x += this.speed;
         if (this.x > window.innerWidth) {
@@ -62,6 +59,7 @@ var Game = (function () {
         for (var i = 0; i < 6; i++) {
             this.cars.push(new Car());
         }
+        this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
         this.player.update();
@@ -115,12 +113,6 @@ var Player = (function (_super) {
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         return _this;
     }
-    Player.prototype.getRectangle = function () {
-        return this.div.getBoundingClientRect();
-    };
-    Player.prototype.update = function () {
-        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
-    };
     Player.prototype.onKeyDown = function (event) {
         switch (event.keyCode) {
             case 65:
@@ -134,6 +126,7 @@ var Player = (function (_super) {
                 if (this.y < -50) {
                     this.y = 670;
                     console.log("de overkant gehaald!");
+                    this.game.addPoint();
                 }
                 break;
             case 83:

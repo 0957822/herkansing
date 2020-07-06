@@ -15,14 +15,6 @@ class Player extends GameObject{
         window.addEventListener("keydown", (e:KeyboardEvent) => this.onKeyDown(e))
     }
 
-    public getRectangle() {
-        return this.div.getBoundingClientRect()
-    }
-    
-    public update() : void {
-        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)"
-    }
-
     // W A S D
     private onKeyDown(event:KeyboardEvent):void {
         switch(event.keyCode){
@@ -37,6 +29,7 @@ class Player extends GameObject{
             if(this.y < -50) {
                 this.y = 670
                 console.log("de overkant gehaald!")
+                this.game.addPoint()
             }
             break
         case 83:
@@ -44,6 +37,7 @@ class Player extends GameObject{
             break
         }
     }
+
     public reset() : void {
         this.x = 400
         this.y = 670
